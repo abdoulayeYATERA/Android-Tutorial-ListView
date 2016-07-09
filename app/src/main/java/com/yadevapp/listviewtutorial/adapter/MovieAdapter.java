@@ -87,4 +87,16 @@ public class MovieAdapter extends BaseAdapter implements ListAdapter {
         //return the view
         return view;
     }
+
+
+    /**
+     *
+     */
+    public class MovieAdapterViewHolder {
+        private View listViewRow;
+        private TextView titleTextView;
+        private TextView yearTextView;
+        private TextView typetextView;
+
+    }
 }
