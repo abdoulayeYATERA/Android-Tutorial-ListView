@@ -66,31 +66,44 @@ public class MovieAdapter extends BaseAdapter implements ListAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         Log.d(TAG, "getView position = " + i);
+        MovieAdapterViewHolder movieAdapterViewHolder;
 
         if (view == null) {
             //if view null inflate the view
             LayoutInflater inflater = LayoutInflater.from(mContext);
             view = inflater.inflate(R.layout.item_listview, viewGroup, false);
+            //instanciate the view holder
+            movieAdapterViewHolder = new MovieAdapterViewHolder(view);
+            //set the view holder has view's tag
+            view.setTag(movieAdapterViewHolder);
         } else {
             //the view is not null, we reuse (no need to inflate)
+            //we get the view holder from the view's tag
+            movieAdapterViewHolder = (MovieAdapterViewHolder) view.getTag();
         }
         //get the movie of that position
         Movie movie = mMovieArrayList.get(i);
         //get the row textviews
-        TextView titleTextView = (TextView) view.findViewById(R.id.item_listview_title);
-        TextView yearTextView = (TextView) view.findViewById(R.id.item_listview_year);
-        TextView typeTextView = (TextView) view.findViewById(R.id.item_listview_type);
+        //we don't need to do the findviewById anymore
+        //TextView titleTextView = (TextView) view.findViewById(R.id.item_listview_title);
+        //TextView yearTextView = (TextView) view.findViewById(R.id.item_listview_year);
+        //TextView typeTextView = (TextView) view.findViewById(R.id.item_listview_type);
+
         //update the textviews
-        titleTextView.setText(movie.getmName());
-        yearTextView.setText(String.valueOf(movie.getmYear()));//we must convert the  year (int) to string
-        typeTextView.setText(movie.getmType());
+        //the textviews retrieved from the viewHolder
+        movieAdapterViewHolder.getTitleTextView().setText(movie.getmName());
+        movieAdapterViewHolder.getYearTextView().setText(String.valueOf(movie.getmYear()));//we must convert the  year (int) to string
+        movieAdapterViewHolder.getTypetextView().setText(movie.getmType());
+        
         //return the view
         return view;
     }
 
 
     /**
-     *
+     * here is the viewholder class
+     * the goal of this class is to prevent
+     * the findViewById call in the getView (findviewbyid takes time because of parsing)
      */
     public class MovieAdapterViewHolder {
         private View listViewRow;
@@ -98,5 +111,24 @@ public class MovieAdapter extends BaseAdapter implements ListAdapter {
         private TextView yearTextView;
         private TextView typetextView;
 
+        public MovieAdapterViewHolder (View row) {
+            listViewRow = row;
+            titleTextView = (TextView) row.findViewById(R.id.item_listview_title);
+            yearTextView = (TextView) row.findViewById(R.id.item_listview_year);
+            typetextView = (TextView) row.findViewById(R.id.item_listview_type);
+        }
+
+        //getters
+        public TextView getTitleTextView() {
+            return titleTextView;
+        }
+
+        public TextView getYearTextView() {
+            return yearTextView;
+        }
+
+        public TextView getTypetextView() {
+            return typetextView;
+        }
     }
 }
