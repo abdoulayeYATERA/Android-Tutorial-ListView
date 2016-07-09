@@ -81,7 +81,7 @@ public class MovieAdapter extends BaseAdapter implements ListAdapter {
         TextView yearTextView = (TextView) view.findViewById(R.id.item_listview_year);
         TextView typeTextView = (TextView) view.findViewById(R.id.item_listview_type);
         //update the textviews
-        //titleTextView.setText(movie.getmName());
+        titleTextView.setText(movie.getmName());
         yearTextView.setText(String.valueOf(movie.getmYear()));//we must convert the  year (int) to string
         typeTextView.setText(movie.getmType());
         //return the view

@@ -15,9 +15,9 @@ public class Movie {
 
     //getters
 
-    /*public String getmName() {
+    public String getmName() {
         return mName;
-    }*/
+    }
 
     public int getmYear() {
         return mYear;
